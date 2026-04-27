@@ -1,0 +1,1 @@
+export default function MessageBar({ message, lastSubmittedAnswer }: { message: string; lastSubmittedAnswer?: string }) { return <div className="message-box">{lastSubmittedAnswer ? `Submitted answer: “${lastSubmittedAnswer}” — ` : ''}{message}</div>; }

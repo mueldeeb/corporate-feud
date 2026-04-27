@@ -1,0 +1,843 @@
+
+/* =========================
+   GAME SHELL
+========================= */
+
+.game-shell{
+  min-height:100vh;
+
+  background-color:#041b4e;
+
+background-image:
+
+radial-gradient(
+  circle,
+  rgba(0,180,255,.12) 0%,
+  rgba(0,180,255,.05) 18%,
+  transparent 55%
+),
+
+radial-gradient(
+  circle,
+  rgba(0,120,255,.08) 0%,
+  transparent 60%
+);
+
+background-size:
+  42px 42px,
+  70px 70px;
+
+background-position:
+  0 0,
+  21px 21px;
+
+  color:#fff;
+
+  padding:12px 26px;
+
+
+  display:flex;
+  flex-direction:column;
+
+  gap:8px;
+
+  overflow:hidden;
+}
+
+
+/* =========================
+   QUESTION HEADER
+========================= */
+
+.top-question{
+  margin:0 auto;
+
+  width:min(820px,100%);
+
+  padding:18px 40px;
+
+  border-radius:22px;
+
+  text-align:center;
+
+  font-size:34px;
+  font-weight:1000;
+
+  color:#fff;
+
+  background:
+    linear-gradient(
+      180deg,
+      #103b8f 0%,
+      #0a2660 100%
+    );
+
+  border:4px solid #5fb4ff;
+
+  box-shadow:
+    inset 0 4px 10px rgba(255,255,255,.18),
+    0 0 20px rgba(0,119,255,.22);
+}
+
+
+/* =========================
+   MAIN LAYOUT
+========================= */
+
+.main-board{
+  display:grid;
+
+  grid-template-columns:
+    190px
+    1fr
+    190px;
+
+  gap:26px;
+
+  align-items:center;
+
+  flex:1;
+}
+
+
+/* =========================
+   TEAM PANELS
+========================= */
+
+.team-panel{
+  min-height:280px;
+
+  padding:22px;
+
+  border-radius:26px;
+
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+
+  background:
+    linear-gradient(
+      180deg,
+      #06142f 0%,
+      #010817 100%
+    );
+
+  border:4px solid #1f63ff;
+
+  box-shadow:
+    0 0 22px rgba(0,119,255,.22);
+}
+
+.team-panel.active{
+  border-color:#ffb100;
+
+  box-shadow:
+    0 0 30px rgba(255,177,0,.35);
+}
+
+.team-label{
+  font-size:30px;
+  font-weight:1000;
+}
+
+.team-score{
+  margin:18px 0;
+
+  font-size:84px;
+  font-weight:1000;
+
+  color:#fff;
+
+  text-shadow:
+    0 0 14px rgba(255,255,255,.35);
+}
+
+
+/* =========================
+   STRIKES
+========================= */
+
+.strikes{
+  min-height:50px;
+}
+
+.strike{
+  display:inline-flex;
+
+  align-items:center;
+  justify-content:center;
+
+  width:44px;
+  height:44px;
+
+  margin:4px;
+
+  border-radius:50%;
+
+  background:#e20001;
+
+  color:#fff;
+
+  font-size:28px;
+  font-weight:1000;
+}
+
+
+/* =========================
+   BOARD WRAPPER
+========================= */
+
+.board-wrapper{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+/* =========================
+   SVG BOARD
+========================= */
+
+.board-outer{
+  position:relative;
+
+  width:100%;
+  max-width:1700px;
+
+ aspect-ratio:1700 / 950;
+
+height:auto;
+
+  margin:auto;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  overflow:visible;
+
+  background:none;
+  border:none;
+  box-shadow:none;
+}
+
+/* =========================
+   SVG FRAME
+========================= */
+
+.board-outer::before{
+
+  content:'';
+
+  position:absolute;
+
+  inset:0;
+
+  background-repeat:no-repeat;
+  background-position:center;
+  background-size:contain;
+
+  z-index:0;
+
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1280 820'%3E%3Cpath d='M 105 315 L 245 315 C 270 165 420 55 640 55 C 860 55 1010 165 1035 315 L 1175 315 C 1230 315 1250 345 1250 410 C 1250 475 1230 505 1175 505 L 1035 505 C 1010 655 860 765 640 765 C 420 765 270 655 245 505 L 105 505 C 50 505 30 475 30 410 C 30 345 50 315 105 315 Z' fill='none' stroke='%23ff9500' stroke-width='10' stroke-linejoin='round' stroke-linecap='round'/%3E%3C/svg%3E");
+
+}
+
+/* =========================
+   DOTS
+========================= */
+
+
+.board-dots{
+  position:absolute;
+
+  inset:0;
+
+  z-index:1;
+
+  pointer-events:none;
+
+  background-image:
+    radial-gradient(
+      circle,
+      #ffb100 0px,
+      #ffb100 5px,
+      transparent 6px
+    );
+
+  background-size:34px 34px;
+
+ 
+
+  opacity:1;
+
+  -webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1280 820'%3E%3Cpath d='M 90 345 L 255 345 C 285 170 435 70 640 70 C 845 70 995 170 1025 345 L 1190 345 C 1230 345 1245 365 1245 410 C 1245 455 1230 475 1190 475 L 1025 475 C 995 650 845 750 640 750 C 435 750 285 650 255 475 L 90 475 C 50 475 35 455 35 410 C 35 365 50 345 90 345 Z' fill='white'/%3E%3C/svg%3E");
+
+  -webkit-mask-repeat:no-repeat;
+  -webkit-mask-position:center;
+  -webkit-mask-size:contain;
+
+  mask-repeat:no-repeat;
+  mask-position:center;
+  mask-size:contain;
+}
+
+
+/* =========================
+   INNER BOARD FRAME
+========================= */
+
+
+.board-inner{
+  position:relative;
+
+  z-index:5;
+
+  width:40%;
+
+  padding:12px;
+
+  border-radius:26px;
+
+  background:#050505;
+
+  border:8px solid #ff9900;
+
+  box-shadow:
+    0 0 10px rgba(255,170,0,.45);
+
+  overflow:hidden;
+}
+
+
+
+
+/* =========================
+   QUESTION BOX
+========================= */
+
+.top-question{
+  width:fit-content;
+
+  margin:40 auto 8px;
+
+  padding:12px 60px;
+
+  border-radius:24px;
+
+  background:#050505;
+
+  border:7px solid #ff9900;
+
+  color:#fff;
+
+  font-size:38px;
+
+  font-weight:1000;
+
+  letter-spacing:1px;
+
+  text-transform:uppercase;
+
+  box-shadow:
+    0 0 12px rgba(255,170,0,.45);
+}
+
+/* =========================
+   ANSWER GRID
+========================= */
+
+.answer-grid{
+  display:grid;
+
+  grid-template-columns:1fr 1fr;
+
+  gap:8px;
+
+  padding:8px;
+
+  background:#d9d9d9;
+
+  border:3px solid #ffffff;
+}
+
+
+/* =========================
+   ANSWER CARD
+========================= */
+
+.answer-card{
+  position:relative;
+
+  height:78px;
+
+  overflow:hidden;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  background:
+    linear-gradient(
+      180deg,
+      #9bd1ff 0%,
+      #2e6fe2 40%,
+      #123e9d 100%
+    );
+
+  border:3px solid #ffffff;
+}
+
+
+/* =========================
+   CARD GLOSS
+========================= */
+
+.answer-card::before{
+  content:'';
+
+  position:absolute;
+
+  top:0;
+  left:0;
+
+  width:100%;
+  height:42%;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255,255,255,.35),
+      rgba(255,255,255,0)
+    );
+}
+
+
+/* =========================
+   HIDDEN NUMBER
+========================= */
+
+.answer-inner{
+  width:100%;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.answer-pill{
+  width:64px;
+  height:64px;
+
+  border-radius:50%;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+background:#10245c;
+
+  border:4px solid rgba(255,255,255,.7);
+}
+
+.answer-number{
+  color:#fff;
+
+  font-size:36px;
+  font-weight:1000;
+}
+
+
+/* =========================
+   REVEALED ANSWER
+========================= */
+
+.answer-card.revealed{
+  background:
+    linear-gradient(
+      180deg,
+      #ffdc7a 0%,
+      #ffae00 45%,
+      #b45c00 100%
+    );
+}
+
+.answer-reveal{
+  position:relative;
+
+  z-index:5;
+
+  width:100%;
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  padding:0 18px;
+}
+
+.answer-text{
+  color:#111;
+
+  font-size:24px;
+  font-weight:1000;
+
+  text-transform:uppercase;
+}
+
+.answer-points-box{
+  min-width:64px;
+  height:48px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  border-radius:8px;
+
+  background:#10245c;
+
+  border:3px solid #fff;
+
+  color:#fff;
+
+  font-size:26px;
+  font-weight:1000;
+}
+
+
+/* =========================
+   BOTTOM BAR
+========================= */
+
+.bottom-bar{
+  display:grid;
+
+  grid-template-columns:
+    auto
+    1fr
+    auto;
+
+  gap:14px;
+
+  align-items:center;
+}
+
+.phase-pill,
+.message-box{
+  padding:14px 16px;
+
+  border-radius:16px;
+
+  font-weight:800;
+
+  background:#0b1220;
+
+  border:2px solid #1e3a8a;
+}
+
+.message-box{
+  color:#f3f4f6;
+}
+
+
+/* =========================
+   OVERLAYS
+========================= */
+
+.round-overlay{
+  position:fixed;
+  inset:0;
+
+  z-index:50;
+
+  background:#050505;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  animation:overlayGone 2.2s ease forwards;
+}
+
+.round-card{
+  display:flex;
+  align-items:center;
+  gap:40px;
+}
+
+.opening-team{
+  font-size:42px;
+  font-weight:1000;
+}
+
+.round-circle{
+  width:210px;
+  height:210px;
+
+  border-radius:50%;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  text-align:center;
+
+  font-size:34px;
+  font-weight:1000;
+
+  background:#e20001;
+}
+
+.round-over{
+  position:fixed;
+  inset:0;
+
+  z-index:40;
+
+  background:rgba(0,0,0,.86);
+
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+
+  text-align:center;
+}
+
+.round-over h1{
+  margin:0;
+
+  font-size:90px;
+
+  color:#f8d67b;
+}
+
+.waiting-overlay,
+.loading-layer{
+  position:fixed;
+  inset:0;
+
+  z-index:60;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  background:rgba(0,0,0,.35);
+
+  font-size:34px;
+  font-weight:1000;
+
+  backdrop-filter:blur(3px);
+}
+
+
+/* =========================
+   ANIMATION
+========================= */
+
+@keyframes revealFlash{
+  0%{
+    transform:scale(.95);
+    filter:brightness(2);
+  }
+
+  100%{
+    transform:scale(1);
+    filter:brightness(1);
+  }
+}
+
+@keyframes overlayGone{
+  0%{
+    opacity:1;
+  }
+
+  80%{
+    opacity:1;
+  }
+
+  100%{
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+  }
+}
+
+/* =========================
+   STRIKE OVERLAY
+========================= */
+
+.strike-overlay{
+  position:fixed;
+
+  inset:0;
+
+  z-index:120;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  pointer-events:none;
+
+animation:strikeOverlayFade 10s ease forwards;
+}
+
+.strike-overlay-x{
+  font-size:420px;
+
+  font-weight:1000;
+
+  line-height:1;
+
+  color:#ff1d1d;
+
+  text-shadow:
+    0 0 18px rgba(255,0,0,.9),
+    0 0 45px rgba(255,0,0,.7),
+    0 0 90px rgba(255,0,0,.45);
+
+  transform:scale(1);
+
+animation:strikePop 5s ease forwards;
+}
+
+
+/* =========================
+   STRIKE ANIMATIONS
+========================= */
+
+@keyframes strikePop{
+
+  0%{
+    opacity:0;
+
+    transform:scale(2.6);
+  }
+
+  30%{
+    opacity:1;
+
+    transform:scale(1);
+  }
+
+  96%{
+    opacity:1;
+
+    transform:scale(1);
+  }
+
+  100%{
+    opacity:0;
+
+    transform:scale(1);
+  }
+}
+
+@keyframes strikeOverlayFade{
+
+  0%{
+    opacity:1;
+  }
+
+  100%{
+    opacity:0;
+  }
+}
+
+
+
+
+
+/* =========================
+   Wings Score
+========================= */
+
+
+.wing-score{
+  position:absolute;
+
+  top:50%;
+  transform:translateY(-50%);
+
+  z-index:40;
+
+  width:170px;
+  height:105px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  border-radius:18px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #4da0ff 0%,
+      #1c56d8 42%,
+      #0b2c87 100%
+    );
+
+  border:5px solid #2a1606;
+
+  box-shadow:
+    0 0 0 4px #ff9900,
+    inset 0 8px 14px rgba(255,255,255,.22),
+    0 0 16px rgba(255,170,0,.25);
+
+  overflow:hidden;
+
+  font-size:68px;
+  font-weight:1000;
+
+  color:#ffffff;
+
+  pointer-events:none;
+}
+
+
+/* TOP SHINE */
+
+.wing-score::before{
+  content:'';
+
+  position:absolute;
+
+  top:0;
+  left:0;
+
+  width:100%;
+  height:45%;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255,255,255,.30),
+      rgba(255,255,255,0)
+    );
+}
+
+
+/* POSITIONS */
+
+.left-score{
+  left:185px;
+}
+
+.right-score{
+  right:185px;
+}
+
+
+
+
+
+
+
+
+
+
+

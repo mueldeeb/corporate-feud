@@ -1,0 +1,1 @@
+@keyframes revealPop{0%{transform:scale(.86) rotateX(70deg);filter:brightness(2)}100%{transform:scale(1) rotateX(0)}}@keyframes overlayGone{0%,75%{opacity:1;visibility:visible}100%{opacity:0;visibility:hidden;pointer-events:none}}

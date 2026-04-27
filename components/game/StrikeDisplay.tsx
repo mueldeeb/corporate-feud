@@ -1,0 +1,1 @@
+export default function StrikeDisplay({ strikes }: { strikes: number }) { return <div className="strikes">{Array.from({ length: strikes }).map((_,i)=><span className="strike" key={i}>X</span>)}</div>; }

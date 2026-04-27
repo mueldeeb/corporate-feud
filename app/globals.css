@@ -1,0 +1,6 @@
+@import '../styles/create.css';
+@import '../styles/game.css';
+@import '../styles/team.css';
+@import '../styles/animations.css';
+@import '../styles/responsive.css';
+*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#050505}.btn{border:0;border-radius:14px;padding:14px 22px;font-weight:1000;font-size:16px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center}.btn.primary{background:#e20001;color:#fff}.btn.secondary{background:#fff;color:#111}.btn.danger{background:#7f1d1d;color:#fff}.btn:disabled{opacity:.4;cursor:not-allowed}.home-screen,.page{min-height:100vh;background:#050505;color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px}.home-screen h1,.page h1{font-size:56px;margin:0 0 10px}.animated-counter{display:inline-block;animation:counterPulse .25s ease}@keyframes counterPulse{0%{transform:scale(1.12)}100%{transform:scale(1)}}
