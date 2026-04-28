@@ -29,7 +29,9 @@ export function submitAnswer(state: GameState, team: Team, input: string): GameS
     next = revealAnswer(next, match.id, team);
     next = addAnswerScore(next, team, match);
     const faceOffAnswers = { ...next.faceOffAnswers, [team]: match.points };
-    const top = getTopAnswer(next.answers);
+   const top = getTopAnswer(
+  next.rounds[next.currentRound].answers
+);
     const other = otherTeam(team);
     const otherScore = faceOffAnswers[other];
     const shouldDecide = match.id === top.id || otherScore !== null;

@@ -3,38 +3,41 @@
    GAME SHELL
 ========================= */
 
+/* =========================
+   GAME SHELL
+========================= */
+
 .game-shell{
   min-height:100vh;
 
   background-color:#041b4e;
 
-background-image:
+  background-image:
 
-radial-gradient(
-  circle,
-  rgba(0,180,255,.12) 0%,
-  rgba(0,180,255,.05) 18%,
-  transparent 55%
-),
+  radial-gradient(
+    circle,
+    rgba(255,190,40,.95) 0px,
+    rgba(255,170,0,.85) 2px,
+    transparent 5px
+  ),
 
-radial-gradient(
-  circle,
-  rgba(0,120,255,.08) 0%,
-  transparent 60%
-);
+  radial-gradient(
+    circle,
+    rgba(255,150,0,.35) 0px,
+    transparent 10px
+  );
 
-background-size:
-  42px 42px,
-  70px 70px;
+  background-size:
+    48px 48px,
+    48px 48px;
 
-background-position:
-  0 0,
-  21px 21px;
+  background-position:
+    0 0,
+    0 0;
 
   color:#fff;
 
   padding:12px 26px;
-
 
   display:flex;
   flex-direction:column;
@@ -480,8 +483,24 @@ background:#10245c;
 }
 
 .opening-team{
-  font-size:42px;
+
+  font-size:54px;
+
   font-weight:1000;
+
+  color:#ffffff;
+
+  letter-spacing:2px;
+
+  text-transform:uppercase;
+
+  text-shadow:
+    0 0 10px rgba(255,255,255,.45),
+    0 0 25px rgba(0,153,255,.35);
+
+  position:relative;
+
+  z-index:5;
 }
 
 .round-circle{
